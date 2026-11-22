@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Ustoz — Informatika, 7–11-sinf</title>
+<style>
+:root{--bg:#f1f5f9;--card:#fff;--ink:#0f172a;--mute:#475569;--acc:#0d9488;--acc2:#0f766e;--soft:#ccfbf1;--line:#e2e8f0;--hero:#0f172a;--heroink:#e2e8f0;--ok:#dcfce7;--okl:#16a34a;--bad:#fee2e2;--badl:#dc2626;--code:#5eead4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#131c2e;--ink:#e2e8f0;--mute:#94a3b8;--acc:#2dd4bf;--acc2:#5eead4;--soft:#134e4a;--line:#24324a;--hero:#050a14;--ok:#14532d;--bad:#7f1d1d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#131c2e;--ink:#e2e8f0;--mute:#94a3b8;--acc:#2dd4bf;--acc2:#5eead4;--soft:#134e4a;--line:#24324a;--hero:#050a14;--ok:#14532d;--bad:#7f1d1d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Trebuchet MS",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+header{background:var(--hero);color:var(--heroink);padding:44px 20px 40px}
+.wrap{max-width:900px;margin:auto}
+header h1{font-size:2rem;line-height:1.2;margin-bottom:10px}
+header p{max-width:520px;color:#94a3b8;margin-bottom:20px}
+.term{background:#020617;border:1px solid #1e293b;border-radius:10px;padding:14px 16px;font-family:Consolas,"Courier New",monospace;font-size:.95rem;color:var(--code);margin-bottom:22px;overflow-x:auto;white-space:pre}
+.term span{color:#64748b}
+.btn{display:inline-block;background:#2dd4bf;color:#042f2e;padding:12px 24px;border-radius:8px;font-weight:bold;text-decoration:none}
+section{padding:36px 20px;max-width:900px;margin:auto}
+h2{font-size:1.4rem;margin-bottom:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:9px 18px;border-radius:8px;font:inherit;font-weight:bold;cursor:pointer}
+.tab.on{background:var(--acc);color:#042f2e;border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.card h3{font-size:1.05rem;color:var(--acc2);margin-bottom:4px}
+.card p{color:var(--mute);font-size:.95rem}
+.card ul{padding-left:18px;margin:8px 0 12px}
+.ask{background:var(--soft);color:var(--ink);border:0;padding:8px 14px;border-radius:6px;font:inherit;font-size:.9rem;cursor:pointer}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--ink);border:2px solid transparent;border-radius:8px;padding:11px 12px;margin:8px 0;font:inherit;cursor:pointer}
+.opt.ok{background:var(--ok);border-color:var(--okl)}
+.opt.bad{background:var(--bad);border-color:var(--badl)}
+#msgs{height:230px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:10px;margin-bottom:10px}
+.m{margin:6px 0;padding:9px 13px;border-radius:10px;max-width:88%}
+.u{background:var(--soft);margin-left:auto}
+.b{background:var(--bg)}
+.row{display:flex;gap:8px}
+.row input{flex:1;min-width:0;padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.row button{background:var(--acc);color:#042f2e;border:0;padding:11px 18px;border-radius:8px;font:inherit;font-weight:bold;cursor:pointer}
+footer{border-top:1px solid var(--line);color:var(--mute);text-align:center;padding:22px 20px;font-size:.9rem}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>AI Ustoz: informatika, 7–11-sinf</h1>
+<p>Darslar, qisqa test va ustoz yordami bir joyda. Sinfingizni tanlang va boshlang.</p>
+<div class="term"><span>>>> </span>print("Salom, dunyo!")
+Salom, dunyo!</div>
+<a class="btn" href="#darslar">Darslarni boshlash</a>
+</div></header>
+
+<section id="darslar">
+<h2>Darslar</h2>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="lessons"></div>
+</section>
+
+<section>
+<h2>Bilimingizni sinang</h2>
+<div class="panel">
+<p id="qt" style="font-weight:bold"></p>
+<div id="opts"></div>
+<p id="sc" style="margin:8px 0;color:var(--acc2);font-weight:bold"></p>
+<button class="tab on" onclick="nextQ()">Keyingi savol</button>
+</div>
+</section>
+
+<section id="chat">
+<h2>Ustozdan so’rang</h2>
+<div class="panel">
+<div id="msgs"><div class="m b">Salom! Informatikadan qaysi mavzu qiyin? Masalan: algoritm, python, bit, excel, tsikl, html yoki internet deb yozing.</div></div>
+<div class="row"><input id="q" placeholder="Savolingizni yozing"><button onclick="send()">Yuborish</button></div>
+</div>
+</section>
+
+<footer>AI Ustoz · Informatika o’quv sahifasi</footer>
+
+<script>
+var D={
+7:[['Kompyuter va uning qurilmalari','Protsessor, xotira, kiritish va chiqarish qurilmalari.',['Kompyuter qurilmalari','Operatsion tizim nima','Fayl va papkalar']],['Axborot va uning turlari','Axborot nima va uni qanday o’lchaymiz.',['Bit va bayt','O’lchov birliklari']],['Matn muharriri','Hujjat yaratish va formatlash.',['Matn kiritish','Formatlash','Jadval qo’shish']]],
+8:[['Algoritm tushunchasi','Algoritm xossalari va berilish usullari.',['Algoritm nima','Blok-sxema','Chiziqli algoritm']],['Elektron jadvallar','Formulalar va oddiy hisob-kitoblar.',['Katak va formula','SUM, AVERAGE','Diagramma']],['Taqdimotlar','Slayd tayyorlash va namoyish qoidalari.',['Slayd yaratish','Animatsiya','Taqdimot qoidalari']]],
+9:[['Python bilan tanishuv','O’zgaruvchi, kiritish va chiqarish.',['print va input','O’zgaruvchilar','Arifmetik amallar']],['Shartli operatorlar','if, elif, else bilan qaror qabul qilish.',['if operatori','Taqqoslash','Mantiqiy amallar']],['Tsikllar','for va while tsikllari.',['for tsikli','while tsikli','Ichma-ich tsikllar']]],
+10:[['Ma’lumotlar tuzilmasi','Ro’yxat, lug’at va to’plam.',['Ro’yxatlar','Lug’atlar','Satrlar bilan ishlash']],['Funksiyalar','Funksiya yozish va chaqirish.',['def va return','Parametrlar','Rekursiya asoslari']],['Kompyuter tarmoqlari','Internet qanday ishlaydi.',['IP manzil','Protokollar','Xavfsizlik asoslari']]],
+11:[['Ma’lumotlar bazasi','Jadvallar va SQL asoslari.',['Jadval va maydon','SELECT so’rovi','Jadvallar bog’lanishi']],['Veb-dasturlash','HTML, CSS va JavaScript asoslari.',['HTML teglar','CSS bilan bezash','JavaScript asoslari']],['Sun’iy intellekt va kiberxavfsizlik','AI qanday ishlaydi, parol va himoya.',['Mashinaviy o’rganish','Kuchli parol','Firibgarlikdan saqlanish']]]
+};
+var cur=7;
+function tabs(){var t=document.getElementById('tabs');t.innerHTML='';[7,8,9,10,11].forEach(function(g){var b=document.createElement('button');b.className='tab'+(g==cur?' on':'');b.textContent=g+'-sinf';b.onclick=function(){cur=g;tabs();lessons()};t.appendChild(b)})}
+function lessons(){var c=document.getElementById('lessons');c.innerHTML='';D[cur].forEach(function(x,i){var d=document.createElement('div');d.className='card';var h=document.createElement('h3');h.textContent=(i+1)+'. '+x[0];var p=document.createElement('p');p.textContent=x[1];var u=document.createElement('ul');x[2].forEach(function(s){var l=document.createElement('li');l.textContent=s;u.appendChild(l)});var b=document.createElement('button');b.className='ask';b.textContent='Ustozdan so’rash';b.onclick=function(){document.getElementById('q').value=x[0]+' mavzusini tushuntiring';location.hash='chat'};d.append(h,p,u,b);c.appendChild(d)})}
+var Q=[['1 bayt necha bitga teng?',['4 bit','8 bit','16 bit','10 bit'],1],['Qaysi biri kiritish qurilmasi?',['Monitor','Printer','Klaviatura','Karnay'],2],['Algoritmning xossalaridan biri qaysi?',['Tushunarlilik','Rangdorlik','Og’irlik','Hajmdorlik'],0],['Python da ekranga chiqarish buyrug’i qaysi?',['input()','print()','show()','write()'],1],['Excel da yig’indini topish funksiyasi?',['AVERAGE','MAX','SUM','COUNT'],2],['HTML nima?',['Dasturlash tili','Veb-sahifa belgilash tili','Operatsion tizim','Ma’lumotlar bazasi'],1],['SQL da ma’lumotni tanlash buyrug’i?',['INSERT','UPDATE','DELETE','SELECT'],3],['Kuchli parol qanday bo’ladi?',['123456','Ismingiz','Harf, raqam va belgilar aralashmasi','qwerty'],2]];
+var qi=0,sc=0,done=false;
+function showQ(){var x=Q[qi];done=false;document.getElementById('qt').textContent=(qi+1)+'/'+Q.length+'. '+x[0];var o=document.getElementById('opts');o.innerHTML='';x[1].forEach(function(s,i){var b=document.createElement('button');b.className='opt';b.textContent=s;b.onclick=function(){if(done)return;done=true;if(i==x[2]){b.className='opt ok';sc++}else{b.className='opt bad';o.children[x[2]].className='opt ok'}document.getElementById('sc').textContent='Natija: '+sc+' / '+(qi+1)};o.appendChild(b)})}
+function nextQ(){qi=(qi+1)%Q.length;if(qi==0){sc=0;document.getElementById('sc').textContent=''}showQ()}
+var A=[['algoritm','Algoritm — masalani yechish uchun aniq, ketma-ket buyruqlar to’plami. Choy damlash tartibi ham algoritm.'],['python','Python — oson o’rganiladigan dasturlash tili. Boshlash uchun print("Salom") ni sinab ko’ring.'],['bit','Bit — axborotning eng kichik birligi: 0 yoki 1. 8 bit = 1 bayt.'],['bayt','1 bayt = 8 bit. 1 Kbayt = 1024 bayt, 1 Mbayt = 1024 Kbayt.'],['excel','Excel — elektron jadval dasturi. Formula = belgisi bilan boshlanadi, masalan =SUM(A1:A5).'],['tsikl','Tsikl — amalni takrorlash. Python da for i in range(5): buyrug’i 5 marta takrorlaydi.'],['html','HTML — veb-sahifa tuzilishini belgilaydigan til. Teglar yordamida sarlavha, rasm va matn qo’yiladi.'],['internet','Internet — dunyo kompyuterlarini bog’laydigan tarmoq. Har bir qurilmaning IP manzili bor.']];
+function say(t,c){var m=document.getElementById('msgs');var d=document.createElement('div');d.className='m '+c;d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight}
+function send(){var i=document.getElementById('q');var v=i.value.trim();if(!v)return;say(v,'u');i.value='';var l=v.toLowerCase(),r=null;A.forEach(function(a){if(!r&&l.indexOf(a[0])>=0)r=a[1]});setTimeout(function(){say(r||'Bu mavzu bo’yicha javobim hali yo’q. Algoritm, python, bit, excel, tsikl, html yoki internet so’zlarini sinab ko’ring.','b')},400)}
+document.getElementById('q').addEventListener('keydown',function(e){if(e.key=='Enter')send()});
+tabs();lessons();showQ();
+</script>
+</body>
+</html>
